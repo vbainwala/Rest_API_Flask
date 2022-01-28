@@ -1,4 +1,3 @@
-from tkinter.tix import INTEGER
 from flask_restful import Resource, reqparse
 from flask_jwt import JWT, jwt_required
 from models.item_models import ItemModel
