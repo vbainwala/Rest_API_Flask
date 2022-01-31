@@ -18,7 +18,7 @@ if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 
 #'sqlite:///data.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(uri)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'vareesh'
 api = Api(app)
