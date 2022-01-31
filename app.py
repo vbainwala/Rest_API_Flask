@@ -1,4 +1,5 @@
 import os
+import re
 
 
 from flask import Flask
@@ -11,7 +12,12 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgresql://pvoximlfppsbaa:618f39d0ed0f264d42120007be1c884c658b82ade223310d3b153547dbfd1746@ec2-54-157-15-228.compute-1.amazonaws.com:5432/d83f1r1i8se68d','sqlite:///data.db')
+
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(uri,'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'vareesh'
 api = Api(app)
